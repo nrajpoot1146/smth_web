@@ -11,6 +11,7 @@ function Dashboard() {
     const [aqi, setAqi] = useState(0);
 
     const [isPMSSleep, setPMSSleep] = useState(false);
+    const targetDevice_id = "smth_esp";
 
     useEffect(() => {
         // Fetch dashboard data from API
@@ -89,7 +90,7 @@ function Dashboard() {
                     <div style={{ width: "150px" }}>
                         <HudToggle
                             onChange={(e) => {
-                                axios.get(`/datastream/set/?V2=${e ? 1 : 0}`)
+                                axios.get(`/datastream/${targetDevice_id}/onButtonPressed/?pin=V2&value=${Number(e)}`)
                                     .then(() => {
                                         setPMSSleep(e);
                                     });
