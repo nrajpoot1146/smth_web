@@ -33,7 +33,7 @@
 ================================ */
 
 body {
-  background-color: var(--bg-main);
+  /* background-color: var(transparent); */
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
 }

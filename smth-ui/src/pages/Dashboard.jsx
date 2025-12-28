@@ -5,6 +5,9 @@ import axios from "axios";
 
 import HudGauge from "../components/HudGauge";
 import HudToggle from '../components/HudToggle';
+import HudBackground from '../components/HudBackground';
+
+import '../styles/hud-background.css';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -62,6 +65,9 @@ function Dashboard() {
 
     return (
         <>
+            <HudBackground />
+            <div className="hud-bg" />
+            <div className="hud-scan" />
             <Grid container spacing={2}>
                 <Grid size={{xs: 4, sm: 6, md: 4, lg: 3}}>
                     <HudGauge

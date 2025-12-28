@@ -1,0 +1,57 @@
+/* ===============================
+   HUD BACKGROUND ANIMATION
+================================ */
+
+.hud-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(0,229,255,0.06), transparent 60%),
+    linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    40px 40px,
+    40px 40px;
+  animation: gridMove 40s linear infinite;
+  z-index: -3;
+}
+
+/* Moving grid */
+@keyframes gridMove {
+  from {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+  to {
+    background-position:
+      0 0,
+      0 40px,
+      40px 0;
+  }
+}
+
+/* ===============================
+   SCAN LINE
+================================ */
+
+.hud-scan {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,229,255,0.08) 50%,
+    transparent 100%
+  );
+  animation: scanMove 6s linear infinite;
+  z-index: -2;
+  pointer-events: none;
+}
+
+@keyframes scanMove {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100%); }
+}
