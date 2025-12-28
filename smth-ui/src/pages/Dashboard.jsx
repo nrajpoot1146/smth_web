@@ -15,7 +15,7 @@ function Dashboard() {
     useEffect(() => {
         // Fetch dashboard data from API
         const fetchData = async (pin) => {
-            const data = await axios.get('http://localhost:8000/datastream/get/' + pin + '/',
+            const data = await axios.get('/datastream/get/' + pin + '/',
                 {
                     headers: {
                         "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -28,10 +28,15 @@ function Dashboard() {
             switch (data.data.stream_key) {
                 case "V0":
                     setTemperature(data.data.value);
+                    break;
                 case "V1":
                     setHumidity(data.data.value);
+                    break;
                 case "V3":
                     setAqi(data.data.value);
+                    break;
+                default:
+                    break;
             }
 
             setTimeout(() => {
@@ -56,6 +61,8 @@ function Dashboard() {
                 <Grid size={2}>
                     <HudGauge
                         value={temprature}
+                        min={0}
+                        max={50}
                         unit="°C"
                         label='Temperature'
                     />
@@ -63,6 +70,8 @@ function Dashboard() {
                 <Grid size={2}>
                     <HudGauge
                         value={humidity}
+                        min={0}
+                        max={100}
                         unit="%"
                         label='Humidity'
                     />

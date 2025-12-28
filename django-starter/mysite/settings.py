@@ -175,14 +175,17 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "../smth-ui/dist/assets")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ALLOW_ALL_ORIGINS = True  # DEV only
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+if DEBUG:
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
-from corsheaders.defaults import default_headers
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'cache-control',
-    'pragma',
-    'expires',
-]
+# CORS_ALLOW_ALL_ORIGINS = True  # DEV only
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",
+# ]
+
+# from corsheaders.defaults import default_headers
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+#     'cache-control',
+#     'pragma',
+#     'expires',
+# ]
