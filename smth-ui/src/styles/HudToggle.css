@@ -1,91 +1,94 @@
 /* ===============================
-   HUD TOGGLE (FIXED TEXT VISIBILITY)
+   HUD TOGGLE (FULLY RESPONSIVE)
 ================================ */
 
 .hud-toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+  max-width: 18em; /* responsive cap */
 }
 
+/* Label */
 .hud-toggle-label {
-    font-family: "Orbitron", sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    color: var(--text-secondary);
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(0.55em, 0.9vw, 0.8em);
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
 }
 
 /* Toggle Button */
 .hud-toggle-btn {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 2.8 / 1;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(12, 26, 43, 0.6);
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2.8 / 1;
+  border-radius: 999em;
+  border: 0.08em solid rgba(255, 255, 255, 0.15);
+  background: rgba(12, 26, 43, 0.6);
+  cursor: pointer;
+  overflow: hidden;
+  font-size: clamp(0.7em, 1.1vw, 1em); /* BASE SCALE */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* States */
 .hud-toggle-btn.on {
-    border-color: var(--success);
-    box-shadow: 0 0 12px var(--success);
+  border-color: var(--success);
+  box-shadow: 0 0 1.2em var(--success);
 }
 
 .hud-toggle-btn.off {
-    border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .hud-toggle-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* Thumb (Ball) */
 .hud-toggle-thumb {
-    position: absolute;
-    top: 2%;
-    left: 2%;
-    height: 96%;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    background: var(--text-secondary);
-    transition: left 0.35s ease, background 0.35s ease;
-    z-index: 2;
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  height: 94%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  transition: left 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+  z-index: 2;
 }
 
+/* ON Position */
 .hud-toggle-btn.on .hud-toggle-thumb {
-    left: calc(100% - 6% - 30%);
-    background: var(--success);
-    box-shadow: 0 0 10px var(--success);
+  left: calc(100% - 3% - 32%);
+  background: var(--success);
+  box-shadow: 0 0 0.8em var(--success);
 }
 
-/* Text Container */
+/* Text */
 .hud-toggle-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    font-family: "Orbitron", sans-serif;
-    font-size: clamp(10px, 1.2vw, 14px);
-    letter-spacing: 0.18em;
-    color: var(--text-primary);
-    pointer-events: none;
-    z-index: 1;
-    transition: justify-content 0.3s ease, padding 0.3s ease;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(0.6em, 1vw, 0.9em);
+  letter-spacing: 0.22em;
+  color: var(--text-primary);
+  pointer-events: none;
+  z-index: 1;
+  transition: justify-content 0.3s ease, padding 0.3s ease;
 }
 
 /* Text Positioning */
 .hud-toggle-btn.off .hud-toggle-text {
-    justify-content: flex-end;
-    padding-right: 5%;
+  justify-content: flex-end;
+  padding-right: 5%;
 }
 
 .hud-toggle-btn.on .hud-toggle-text {
-    justify-content: flex-start;
-    padding-left: 5%;
+  justify-content: flex-start;
+  padding-left: 5%;
 }

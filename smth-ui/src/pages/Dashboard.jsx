@@ -5,6 +5,9 @@ import axios from "axios";
 
 import HudGauge from "../components/HudGauge";
 import HudToggle from '../components/HudToggle';
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 function Dashboard() {
     const [temprature, setTemperature] = useState(0);
     const [humidity, setHumidity] = useState(0);
@@ -15,8 +18,9 @@ function Dashboard() {
 
     useEffect(() => {
         // Fetch dashboard data from API
+        console.log("BASE_URL:", BASE_URL);
         const fetchData = async (pin) => {
-            const data = await axios.get('/datastream/get/' + pin + '/',
+            const data = await axios.get(BASE_URL + '/datastream/get/' + pin + '/',
                 {
                     headers: {
                         "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -49,7 +53,7 @@ function Dashboard() {
         fetchData("V1");
         fetchData("V3");
 
-        axios.get('/datastream/get/V2/').then((response) => {
+        axios.get(BASE_URL + '/datastream/get/V2/').then((response) => {
             setPMSSleep(Boolean(+response.data.value));
         });
 
@@ -59,7 +63,7 @@ function Dashboard() {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid size={2}>
+                <Grid size={{xs: 4, sm: 6, md: 4, lg: 3}}>
                     <HudGauge
                         value={temprature}
                         min={0}
@@ -68,7 +72,7 @@ function Dashboard() {
                         label='Temperature'
                     />
                 </Grid>
-                <Grid size={2}>
+                <Grid size={{xs: 4, sm: 6, md: 4, lg: 3}}>
                     <HudGauge
                         value={humidity}
                         min={0}
@@ -77,7 +81,7 @@ function Dashboard() {
                         label='Humidity'
                     />
                 </Grid>
-                <Grid size={2}>
+                <Grid size={{xs: 4, sm: 6, md: 4, lg: 3}}>
                     <HudGauge
                         value={aqi}
                         min={0}
@@ -86,11 +90,11 @@ function Dashboard() {
                         label='aqi'
                     />
                 </Grid>
-                <Grid size={2}>
-                    <div style={{ width: "150px" }}>
+                <Grid size={ {xs: 22, sm: 6, md: 4, lg: 3} }>
+                    <div style={{ width: "150px", height: "150px", margin: "auto" }}>
                         <HudToggle
                             onChange={(e) => {
-                                axios.get(`/datastream/${targetDevice_id}/onButtonPressed/?pin=V2&value=${Number(e)}`)
+                                axios.get(BASE_URL + `/datastream/${targetDevice_id}/onButtonPressed/?pin=V2&value=${Number(e)}`)
                                     .then(() => {
                                         setPMSSleep(e);
                                     });

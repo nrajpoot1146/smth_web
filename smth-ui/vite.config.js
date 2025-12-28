@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react(), basicSsl()],
   server: {
-    host: false, // Allows access via IP
+    host: true, // Allows access via IP
+    https: true // Enable HTTPS
   }
 })
