@@ -35,9 +35,9 @@ def onButtonPressed(request:HttpRequest, device_id:str):
     value:int = int(request.GET.get("value"))
     channel_layer = get_channel_layer()
     
-    # with connection.cursor() as cursor:
-    #     for key in request.GET.keys():
-    #         cursor.execute("UPDATE datastreams_streams SET value = %s, isUpdated = 1, updatedOn = now() WHERE stream_key = %s", [value, pin])
+    with connection.cursor() as cursor:
+        for key in request.GET.keys():
+            cursor.execute("UPDATE datastreams_streams SET value = %s, isUpdated = 1, updatedOn = now() WHERE stream_key = %s", [value, pin])
     
     async_to_sync(channel_layer.group_send)(
         f"device_{device_id}",
