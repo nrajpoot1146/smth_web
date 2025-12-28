@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT AQI Dashboard</title>
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="{% static 'dashboard/dashboard.css' %}">
+</head>
+
+<body>
+
+<h2>IoT Sensor fsdfdsfdsfsdDashboard</h2>
+
+<div class="dashboard">
+
+    <div class="gauge" id="tempGauge" style="--value:0; --color:#f97316;">
+        <div class="gauge-content">
+            <div class="gauge-value" id="tempValue">--°C</div>
+            <div class="gauge-label">Temperature</div>
+        </div>
+    </div>
+
+    <div class="gauge" id="humGauge" style="--value:0; --color:#38bdf8;">
+        <div class="gauge-content">
+            <div class="gauge-value" id="humValue">--%</div>
+            <div class="gauge-label">Humidity</div>
+        </div>
+    </div>
+
+    <div class="gauge" id="aqiGauge" style="--value:0; --color:#22c55e;">
+        <div class="gauge-content">
+            <div class="gauge-value" id="aqiValue">--</div>
+            <div class="gauge-label">AQI</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="control">
+    <button id="v0ToggleBtn" onclick="toggleV0()">V0 OFF</button>
+    <div id="setStatus"></div>
+</div>
+
+<script src="{% static 'dashboard/dashboard.js' %}"></script>
+</body>
+</html>

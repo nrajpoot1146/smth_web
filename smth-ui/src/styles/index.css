@@ -1,0 +1,41 @@
+@import './theme.css';
+@import './typography.css';
+
+/* ===============================
+   HUD EFFECTS
+================================ */
+
+.glow {
+  text-shadow:
+    0 0 6px rgba(0, 229, 255, 0.8),
+    0 0 14px rgba(0, 229, 255, 0.6);
+}
+
+/* ===============================
+   HUD CARD
+================================ */
+
+.hud-card {
+  background: rgba(12, 26, 43, 0.75);
+  border: 1px solid var(--border-glow);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+}
+
+/* ===============================
+   ANIMATIONS
+================================ */
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 5px var(--color-primary); }
+  50% { box-shadow: 0 0 20px var(--color-primary); }
+  100% { box-shadow: 0 0 5px var(--color-primary); }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+

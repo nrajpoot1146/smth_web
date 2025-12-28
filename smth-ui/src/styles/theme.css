@@ -1,0 +1,39 @@
+/* ===============================
+   JARVIS SCI-FI THEME VARIABLES
+================================ */
+
+:root {
+  /* Core Glow Colors */
+  --color-primary: #00E5FF;
+  --color-secondary: #1A9FFF;
+  --color-accent: #7DF9FF;
+
+  /* Backgrounds */
+  --bg-main: #050B12;
+  --bg-panel: #0C1A2B;
+  --bg-panel-inner: #102433;
+
+  /* Status */
+  --success: #00FF9C;
+  --warning: #FFC857;
+  --error: #FF3B3B;
+  --info: #5CE1E6;
+
+  /* Text */
+  --text-primary: #EAFBFF;
+  --text-secondary: #8FAEC2;
+  --text-disabled: #4F6B7A;
+
+  /* Borders */
+  --border-glow: rgba(0, 229, 255, 0.35);
+}
+
+/* ===============================
+   GLOBAL BACKGROUND
+================================ */
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}

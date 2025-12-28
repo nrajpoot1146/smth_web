@@ -1,0 +1,45 @@
+/* ===============================
+   GOOGLE FONTS
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Inter:wght@300;400;500&family=JetBrains+Mono&display=swap');
+
+/* ===============================
+   HEADINGS
+================================ */
+
+.hud-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hud-panel-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+}
+
+/* ===============================
+   BODY TEXT
+================================ */
+
+.text-body {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ===============================
+   SENSOR VALUES / DATA
+================================ */
+
+.data-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
