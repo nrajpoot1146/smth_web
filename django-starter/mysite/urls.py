@@ -24,6 +24,7 @@ urlpatterns = [
     path('datastream/set/', datastream.set),
     path('datastream/get/<str:pin>/', datastream.get),
     path('datastream/<str:device_id>/onButtonPressed/', datastream.onButtonPressed),
+    path('datastream/<str:device_id>/checkDeviceStatus/', datastream.checkDeviceStatus),
     # path("datastream/sse/<str:pin>/", datastream.sse_stream),
     # path("datastream/sse/<str:pin>/", datastream.sse_stream),
     path('', view.home)

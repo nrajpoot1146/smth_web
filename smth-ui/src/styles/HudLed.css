@@ -1,0 +1,78 @@
+/* ===============================
+   HUD LED INDICATORS
+================================ */
+
+.hud-led-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+/* LED Base */
+.hud-led {
+  display: inline-block;
+  border-radius: 50%;
+  background: #222;
+  box-shadow: inset 0 0 0.2em #000;
+  position: relative;
+}
+
+/* Glow Layer */
+.hud-led::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  border-radius: 50%;
+  opacity: 0.9;
+  filter: blur(0.6em);
+}
+
+/* STATES */
+.hud-led.green {
+  background: var(--success);
+  box-shadow: 0 0 0.4em var(--success);
+}
+.hud-led.green::after {
+  background: var(--success);
+}
+
+.hud-led.yellow {
+  background: var(--warning);
+  box-shadow: 0 0 0.4em var(--warning);
+}
+.hud-led.yellow::after {
+  background: var(--warning);
+}
+
+.hud-led.red {
+  background: var(--error);
+  box-shadow: 0 0 0.4em var(--error);
+}
+.hud-led.red::after {
+  background: var(--error);
+}
+
+.hud-led.blue {
+  background: var(--color-primary);
+  box-shadow: 0 0 0.4em var(--color-primary);
+}
+.hud-led.blue::after {
+  background: var(--color-primary);
+}
+
+/* OFF */
+.hud-led.off {
+  background: #1b1f26;
+  box-shadow: inset 0 0 0.3em #000;
+}
+.hud-led.off::after {
+  display: none;
+}
+
+/* Label */
+.hud-led-label {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(0.6em, 0.9vw, 0.8em);
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+}

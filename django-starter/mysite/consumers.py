@@ -14,6 +14,7 @@ class DeviceConsumer(AsyncWebsocketConsumer):
             self.group_name,
             self.channel_name
         )
+        await sync_to_async(self.mark_active)()
         await self.accept()
 
     async def disconnect(self, close_code):
@@ -21,6 +22,7 @@ class DeviceConsumer(AsyncWebsocketConsumer):
             self.group_name,
             self.channel_name
         )
+        await sync_to_async(self.mark_inactive)()
 
     async def receive(self, text_data):
         # Optional: handle device messages
@@ -56,3 +58,11 @@ class DeviceConsumer(AsyncWebsocketConsumer):
         with connection.cursor() as cursor:
             for key in data.keys():
                 cursor.execute("UPDATE datastreams_streams SET value = %s, isUpdated = 1, updatedOn = now() WHERE stream_key = %s", [data[key], key])
+
+    def mark_inactive(self):
+        with connection.cursor() as cursor:
+            cursor.execute("UPDATE devices SET is_active = 0 WHERE device_id = %s", [self.device_id])
+    
+    def mark_active(self):
+        with connection.cursor() as cursor:
+            cursor.execute("UPDATE devices SET is_active = 1 WHERE device_id = %s", [self.device_id])

@@ -48,3 +48,14 @@ def onButtonPressed(request:HttpRequest, device_id:str):
         }
     )
     return JsonResponse({ "status": "ok" });
+
+def checkDeviceStatus(request:HttpRequest, device_id:str):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * from devices WHERE device_id = %s", [device_id])
+        row = cursor.fetchall()[0]
+        return JsonResponse({
+            "id": row[0], 
+            "device_id": row[1],
+            "is_active": row[2]
+            })
+    return HttpResponse("NA");

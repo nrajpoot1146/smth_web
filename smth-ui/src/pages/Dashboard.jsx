@@ -8,6 +8,7 @@ import HudToggle from '../components/HudToggle';
 import HudBackground from '../components/HudBackground';
 
 import '../styles/hud-background.css';
+import HudLed from '../components/HudLed';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -17,6 +18,7 @@ function Dashboard() {
     const [aqi, setAqi] = useState(0);
 
     const [isPMSSleep, setPMSSleep] = useState(false);
+    const [isDeviceActive, setIsDeviceActive] = useState(false);
     const targetDevice_id = "smth_esp";
 
     useEffect(() => {
@@ -56,6 +58,25 @@ function Dashboard() {
         fetchData("V1");
         fetchData("V3");
 
+        const checkDeviceStatus = async () => {
+            try {
+                var data = await axios.get(BASE_URL + `/datastream/${targetDevice_id}/checkDeviceStatus/`, {
+                    headers: {
+                        "Cache-Control": "no-cache, no-store, must-revalidate",
+                        "Pragma": "no-cache",
+                        "Expires": "0"
+                    }
+                });
+                setIsDeviceActive(data.data.is_active);
+            } catch (error) {
+                setIsDeviceActive(data.data.is_active);
+            }
+
+            setTimeout(checkDeviceStatus, 1000);
+        }
+
+        checkDeviceStatus();
+
         axios.get(BASE_URL + '/datastream/get/V2/').then((response) => {
             setPMSSleep(Boolean(+response.data.value));
         });
@@ -69,6 +90,9 @@ function Dashboard() {
             <div className="hud-bg" />
             <div className="hud-scan" />
             <Grid container spacing={2}>
+                <Grid size={{xs: 22, sm: 22, md: 22, lg: 22}}>
+                    <HudLed status={isDeviceActive ? "green" : "red"} label="Device Status" />
+                </Grid>
                 <Grid size={{xs: 4, sm: 6, md: 4, lg: 3}}>
                     <HudGauge
                         value={temprature}
@@ -94,6 +118,8 @@ function Dashboard() {
                         max={700}
                         unit=""
                         label='aqi'
+                        lowThreshold={0.14}
+                        highThreshold={0.35}
                     />
                 </Grid>
                 <Grid size={ {xs: 22, sm: 6, md: 4, lg: 3} }>
