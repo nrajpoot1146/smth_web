@@ -30,15 +30,9 @@ class DeviceConsumer(AsyncWebsocketConsumer):
         print(text_data)
         try:
             data:dict = json.loads(text_data)
-            await sync_to_async(self.saveData)(data)
-            # await self.channel_layer.group_send(
-            #     f"device_{device_id}",
-            #     {
-            #         "type": "send_to_web",
-            #         "stream_key": data,
-            #         "value": data.values()[0]
-            #     }
-            # )
+            if data["e"] == 3:
+                sensordata:dict = data["d"]
+                await sync_to_async(self.saveData)(sensordata)
         except Exception as e:
             print(e)
             pass
@@ -56,8 +50,7 @@ class DeviceConsumer(AsyncWebsocketConsumer):
 
     def saveData(self, data):
         with connection.cursor() as cursor:
-            for key in data.keys():
-                cursor.execute("UPDATE datastreams_streams SET value = %s, isUpdated = 1, updatedOn = now() WHERE stream_key = %s", [data[key], key])
+            cursor.execute("UPDATE datastreams_streams SET value = %s, isUpdated = 1, updatedOn = now() WHERE stream_key = %s", [data["v"], data["p"]])
 
     def mark_inactive(self):
         with connection.cursor() as cursor:
